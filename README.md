@@ -1,7 +1,7 @@
 # Local-Bardode
 Addon for Blender that allows the creation of various barcode types
 
-![cover|500x500,100%](upload://bPdV53KMGRld8PcJJx3xvbf7ggj.jpeg) 
+![Cover Image](readme_images/cover.jpg)
 
 This addon allows you to create various barcodes as meshes. It currently supports QR, MicroQR, PDF417, and Aztec codes.
 
@@ -14,7 +14,8 @@ These currently only work in Object Mode. They might half work in edit mode, but
 # Summary of the barcodes:
 <details>
   <summary>QR Codes</summary>
-![qr_light|500x500,50%](upload://4ckg1mtD8NTOVySpNPsMKpDYO8R.jpeg) ![qr_dark|500x500,50%](upload://sZqVSWSfCTxx8rdU5N55lU8zU4Q.jpeg)
+
+![qr_light](readme_images/qr_light.jpg) ![qr_dark](readme_images/qr_dark.jpg)
 
 QR codes are most commonly used for marketing. They are also sometimes used in electronics or manufacturing as machine readable product numbers. They will often contain a URL, although they can hold any text or numbers. They can hold many common symbols. Technically, they can hold kanji as well, but I could not get it working. If you can get Blender to take kanji as a text input, it *should* automatically switch to kanji encoding mode. If it doesn't, please let me know.
 
@@ -25,7 +26,7 @@ At max size, and with lowest EC level, they can theoretically store up to 4,296 
 <details>
   <summary>MicroQR</summary>
 
-![micro_light|500x500,50%](upload://5jzUPXfiUYJk3hVmkV0jwtHYRID.jpeg) ![micro_dark|500x500,50%](upload://fxuN74ZeR3qiqCP5OGSK11xzNJH.jpeg) 
+![micro_light](readme_images/micro_light.jpg) ![micro_dark](readme_images/micro_dark.jpg) 
 
 
 MicroQR codes are smaller versions of QR codes. They have a higher information density, but a much smaller top size. Big warning: they are VERY rare, and I do not believe a single Android app can read them. Apparently, the [i-nigma](https://apps.apple.com/us/app/i-nigma-qr-code-data-matrix-and-1d-barcode-reader/id388923203) app for apple devices can read them, but I can't test this. If you find an Android app that can scan these, let me know.
@@ -36,7 +37,7 @@ MicroQR codes are smaller versions of QR codes. They have a higher information d
 <details>
   <summary>Aztec Codes</summary>
 
-![aztec_light|500x500,50%](upload://vQJXYeb7UoQAqLEfRf82BjJx0et.jpeg) ![aztec_dark|500x500,50%](upload://lOVwm8Qs2cHfanMyPOrrwXi03wE.jpeg) 
+![aztec_light](readme_images/aztec_light.jpg) ![aztec_dark](readme_images/aztec_dark.jpg)
 
 Aztec codes are commonly used on boarding passes, and medical labeling and equipment. They can be read inverted and mirrored and require no quiet space around them. They are less common than QR codes, and the scanner app support for them is a little rarer and less reliable. They have error Correction support, but I could not figure out how to control this in the generator library. I believe the generated codes have some, but I do not know how much.
 </details>
@@ -46,7 +47,7 @@ Aztec codes are commonly used on boarding passes, and medical labeling and equip
   <summary>PDF417 Codes</summary>
 
 
-![pdf_light|500x500,50%](upload://iDRvHuDxFOqDyi1A4VkSCzZCr2T.jpeg) ![pdf_dark|500x500,50%](upload://nZrwDoFTKYL8I9RIFl3NMlP7ydc.jpeg) 
+![pdf_light](readme_images/pdf_light.jpg) ![pdf_dark](readme_images/pdf_dark.jpg)
 
 PDF417 codes are commonly used for logistics, document management, and ID cards and systems. If you have a US Drivers license, there is probably one on it. They can have a very high data density. PDF417s can theoretically hold up to 1850 alphanumeric characters, but in practice, due to encoding differences, it will be lower. They support multiple levels of Error Correction. These are more difficult than the others here to read with a cellphone camera, so if that is the goal, try to keep it fairly small.
 </details>
