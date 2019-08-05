@@ -1,0 +1,117 @@
+
+import bpy
+import bmesh
+# from math import radians
+import numpy
+from bpy_extras import object_utils
+
+from . generators import barcode
+
+from . shared import import_svg, mesh_from_curve, resize_along_axis
+from . shared import move_origin_3d_cursor, center_on_cursor, draw_table
+from . shared import build_borders, build_obj_from_table
+
+from . shared import import_svg, mesh_from_curve
+
+
+class ABC_OT_mesh_barcode(bpy.types.Operator):
+    """Construct a QR code mesh"""
+    bl_idname = "abc.make_barcode"
+    bl_label = "Barcode"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    data: bpy.props.StringProperty(
+        name="Data",
+        description="Data to store in the PDF417 code",
+        default="100001100001")
+    invert: bpy.props.BoolProperty(
+        name="Invert",
+        description="Create mesh in the dark areas instead of light"
+                    " The in the center should be dark",
+        default=False)
+    border: bpy.props.IntProperty(
+        name="Border",
+        description="Border width to maintain quiet space. "
+                    "Note: Aztec codes do not need quiet space. "
+                    "(disabled when inverted)",
+        default=0, min=0, max=10)
+    rescale: bpy.props.BoolProperty(
+        name="Rescale",
+        description="Scale the code to specific size on the X Axis",
+        default=True)
+    rescale_axis: bpy.props.EnumProperty(
+        items=[('X', "X (default)", "Scale along X"),
+               ('Y', "Y", "Scale along Y")],  # ('Z', "Z", "Scale along Z")]
+        name="Resize axis",
+        description="Choose axis to rescale to length",
+        default='X')
+    size: bpy.props.FloatProperty(
+        name="Axis length",
+        description="Specify length of chosen axis",
+        default=1, min=0)
+    join: bpy.props.BoolProperty(
+        name="Join blocks",
+        description="Join vertices of adjacent blocks",
+        default=True)
+    center: bpy.props.BoolProperty(
+        name="Center on cursor",
+        description="Centers the generated code on the 3D cursor.",
+        default=False)
+    '''
+    security: bpy.props.IntProperty(
+        name="Security",
+        description="Sets the error correction level. "
+                    "Generates a bigger code but can survive more damage. ",
+        default=0, min=0, max=8)
+    ratio: bpy.props.FloatProperty(
+        name="Ratio",
+        description="Specify the module height ratio. "
+                    "PDF417 modules are tall and narrow. "
+                    "They can still be read at different ratios, "
+                    "but it's not reliable",
+        default=3, min=0)
+    '''
+
+
+    def create_barcode_svg(self):
+        # creates a SVG file with a PDF417 barcode containing self.data
+        # Is allowed to use self.stuff because it will always be in this class.
+
+        '''['code39', 'code128', 'ean', 'ean13', 'ean8', 'gs1', 'gtin',
+        'isbn', 'isbn10', 'isbn13', 'issn', 'jan', 'pzn', 'upc', 'upca']'''
+
+        name = barcode.generate('code128', self.data, output='barcode')
+
+        return name
+
+    def execute(self, context):
+        svg = self.create_barcode_svg()
+        svg_curve_obj, active_col = import_svg(svg)
+        svg_mesh_obj = mesh_from_curve(svg_curve_obj, active_col, False)
+        '''
+        aztec_table = self.create_aztec_table()
+
+        if not self.invert:
+            aztec_table = build_borders(aztec_table, self.border, 1)
+
+        aztec_obj = build_obj_from_table(
+            context,
+            aztec_table,
+            1,
+            self.invert,
+            self.join,
+            name="AztecCode")
+
+        # optionally rescales the QR code object
+        if self.rescale:
+            resize_along_axis(aztec_obj, self.size, 'X')
+
+        # optionally centers the object on the 3D cursor
+        if self.center:
+            center_on_cursor(aztec_obj)
+        else:
+            move_origin_3d_cursor(aztec_obj)
+        '''
+
+        return {'FINISHED'}
+
