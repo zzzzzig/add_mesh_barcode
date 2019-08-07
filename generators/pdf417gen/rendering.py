@@ -1,4 +1,4 @@
-from PIL import Image, ImageColor, ImageOps
+# from PIL import Image, ImageColor, ImageOps
 from xml.etree.ElementTree import ElementTree, Element, SubElement
 
 
@@ -27,7 +27,7 @@ def modules(codes):
                 yield col_id, row_id, digit == "1"
                 col_id += 1
 
-
+'''
 def parse_color(color):
     return ImageColor.getrgb(color)
 
@@ -99,3 +99,4 @@ def render_svg(codes, scale=3, ratio=3, color="#000", description=None):
             })
 
     return ElementTree(element=root)
+'''
