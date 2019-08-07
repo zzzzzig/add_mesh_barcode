@@ -63,7 +63,7 @@ bl_info = {
                    " libraries, not a web service. Heavily modified version "
                    "of local QRCode by Jacob Welsh.",
     "author": "Jacob Welsh, zzzzzig",
-    "version": (0, 0, 1),
+    "version": (0, 0, 2),
     "blender": (2, 80, 0),
     "location": "View3D > Add > Mesh > Barcode",
     "wiki_url": "None",
